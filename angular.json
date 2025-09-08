@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ocr": {
+    "eu-food-id-code": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -58,10 +58,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ocr:build:production"
+              "buildTarget": "eu-food-id-code:build:production"
             },
             "development": {
-              "buildTarget": "ocr:build:development"
+              "buildTarget": "eu-food-id-code:build:development"
             }
           },
           "defaultConfiguration": "development"
