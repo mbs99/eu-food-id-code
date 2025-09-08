@@ -28,6 +28,6 @@ jobs:
           server: webhosting32.1blu.de
           protocol: ftps
           server-dir: /www/food-code/
-          local-dir: ./dist/browser/
+          local-dir: ./dist/eu-food-id-code/browser/
           username: ${{ secrets.ftp_user }}
           password: ${{ secrets.ftp_password }}
