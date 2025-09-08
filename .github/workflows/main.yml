@@ -26,7 +26,8 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: webhosting32.1blu.de
-          server-dir: /www/food-code
+          protocol: ftps
+          server-dir: /www/food-code/
           local-dir: ./dist/browser/
           username: ${{ secrets.ftp_user }}
           password: ${{ secrets.ftp_password }}
