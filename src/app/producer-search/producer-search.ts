@@ -23,7 +23,6 @@ export class ProducerSearch {
 
   appData: WritableSignal<AppData | null> = signal(null);
 
-
   search() {
     if (this.code().length) {
       this.searchResult.set(null);
@@ -51,9 +50,7 @@ export class ProducerSearch {
 
       if (this._dbService.appDataQueryResult()?.records.length) {
         const appData = this._dbService.appDataQueryResult().records[0];
-        this.appData.set({
-          ...appData,
-        });
+        this.appData.set(appData);
       } else if (this._dbService.producerQueryResult()?.error) {
 
       }

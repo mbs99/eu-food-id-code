@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, isDevMode} from '@angular/core';
 import {Producer} from './shared/producer';
 import {parse} from "csv-parse/browser/esm/sync";
 
@@ -7,12 +7,11 @@ import {parse} from "csv-parse/browser/esm/sync";
 })
 export class ProducerDataService {
 
-  private updateUrl = 'http://localhost:4200/export.csv';
+  private updateUrl = isDevMode() ? 'http://localhost:4200/export.csv' : '/export.csv';
 
   getProducerData() {
     return fetch(this.updateUrl).then(response => {
       if(response.ok) {
-        const resultMap = new Map<string, Producer>();
         return response.text().then(csvData => {
           const records = parse(csvData, {
             delimiter: ";",

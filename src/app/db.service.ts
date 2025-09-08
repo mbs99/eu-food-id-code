@@ -218,7 +218,7 @@ export class DbService {
           } else {
             // @ts-ignore
             const results =  event.target.result ?? [];
-            records.push(results.slice(0,1));
+            records.push(...results.slice(0,1));
           }
           this._appDataQueryResult.set({
             records
