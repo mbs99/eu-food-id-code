@@ -1,0 +1,57 @@
+<form class="pure-form pure-form-stacked container" #form="ngForm">
+  <fieldset>
+    <legend>Produzentensuche</legend>
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-3">
+        <label for="country">Land</label>
+        <select id="country" class="pure-input-1-2" required [(ngModel)]="country" name="country">
+          <option>DE</option>
+        </select>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-3">
+        <label for="state">Bundesland</label>
+        <select id="state" class="pure-input-1-2" required [(ngModel)]="state" name="state">
+          <option>BW</option>
+        </select>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-3">
+        <label for="code">Code</label>
+        <input id="code" class="pure-u-23-24" type="text" required="" [(ngModel)]="code" name="code"/>
+      </div>
+    </div>
+    <div class="pure-u-1">
+      <button type="submit" class="pure-button pure-button-primary" (click)="search()">Suchen</button>
+      <button type="reset" class="pure-button pure-button-secondary" (click)="reset()">Eingaben löschen</button>
+    </div>
+  </fieldset>
+</form>
+
+{{appData()?.timestamp}}
+
+@if (searchResult()) {
+  <form class="pure-form pure-form-stacked container">
+    <fieldset>
+      <legend>Ergebnis</legend>
+      <div class="pure-g">
+        <div class="pure-u-1">
+          <table class="pure-table pure-table-horizontal">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Adresse</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>1</td>
+              <td>{{ searchResult()?.name }}</td>
+              <td>{{ searchResult()?.address }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+}

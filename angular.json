@@ -25,6 +25,8 @@
               }
             ],
             "styles": [
+              "node_modules/purecss/build/pure-min.css",
+              "node_modules/purecss/build/grids-responsive-min.css",
               "src/styles.css"
             ]
           },
@@ -34,7 +36,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumError": "3MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -82,6 +84,8 @@
               }
             ],
             "styles": [
+              "node_modules/purecss/build/pure-min.css",
+              "node_modules/purecss/build/grids-responsive-min.css",
               "src/styles.css"
             ]
           }
