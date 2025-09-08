@@ -27,5 +27,6 @@ jobs:
         with:
           server: webhosting32.1blu.de
           server-dir: /www/food-code
-          username: ${{ secrets.ftpuer }}
-          password: ${{ secrets.password }}
+          local-dir: ./dist/browser/
+          username: ${{ secrets.ftp_user }}
+          password: ${{ secrets.ftp_password }}
