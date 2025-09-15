@@ -25,6 +25,7 @@
               }
             ],
             "styles": [
+              "src/custom-theme.scss",
               "node_modules/purecss/build/pure-min.css",
               "node_modules/purecss/build/grids-responsive-min.css",
               "src/styles.css"
