@@ -2,3 +2,9 @@
   padding-left: 10%;
   padding-right: 10%;
 }
+
+@media only screen and (max-width: 480px) {
+  .pure-form button[type='reset'] {
+    margin: 0.7em 0 0;
+  }
+}
