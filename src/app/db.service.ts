@@ -192,8 +192,8 @@ export class DbService {
               }
             });
           const appDateRecord: AppDataDbObject = {
-            contries: Array.from(countrySet.values()),
-            states: Array.from(statesSet.values()),
+            contries: Array.from(countrySet.values()).sort(),
+            states: Array.from(statesSet.values()).sort(),
             timestamp: Date.now(),
           };
           const appDataStoreAddRequest = appDataStore?.add(appDateRecord);
