@@ -123,7 +123,7 @@ export class DbService {
           } else {
             this._producerQueryResult.set({
               records: [],
-              msg: 'No mactch',
+              msg: 'no search results',
             });
           }
         };
