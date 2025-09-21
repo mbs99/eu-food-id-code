@@ -15,6 +15,7 @@ interface AppDataDbObject {
   contries: string[];
   states: string[];
   timestamp: number;
+  hash?: string;
 }
 
 export interface DbQueryResult<T> {
@@ -49,6 +50,8 @@ export class DbService {
     records: [],
   });
 
+  private static readonly DB_VERSION = 2;
+
   producerQueryResult = this._producerQueryResult.asReadonly();
 
   constructor() {
@@ -56,7 +59,7 @@ export class DbService {
   }
 
   private openDB() {
-    const dbOpenRequest = window.indexedDB.open(this._dbName, 1);
+    const dbOpenRequest = window.indexedDB.open(this._dbName, DbService.DB_VERSION);
 
     dbOpenRequest.onerror = (event) => {
       this._dbError.set([...this._dbError(), new Error(`Error loading database: ${event}`)]);
@@ -131,7 +134,7 @@ export class DbService {
     }
   }
 
-  importData(producers: Producer[]) {
+  importData(producers: Producer[], hash?: string) {
     if (this._dbReady()) {
       const transaction = this.db?.transaction(
         [this._producerObjectStoreName, this._appDataObjectStoreName],
@@ -195,6 +198,7 @@ export class DbService {
             contries: Array.from(countrySet.values()).sort(),
             states: Array.from(statesSet.values()).sort(),
             timestamp: Date.now(),
+            hash,
           };
           const appDataStoreAddRequest = appDataStore?.add(appDateRecord);
           if (appDataStoreAddRequest) {
@@ -237,6 +241,7 @@ export class DbService {
               contries: [],
               states: [],
               init: true,
+              hash: undefined,
             };
             records.push(init);
           } else {

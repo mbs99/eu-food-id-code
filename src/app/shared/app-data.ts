@@ -3,4 +3,5 @@ export interface AppData {
   states: string[];
   timestamp?: number;
   init: boolean;
+  hash?: string;
 }

@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, effect, inject, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  output,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { from } from 'rxjs';
 import { ProducerDataService } from '../producer-data.service';
@@ -17,14 +24,22 @@ export class ProducerInit {
   private readonly _dbService = inject(DbService);
 
   producers = toSignal(from(this._producerDataService.getProducerData()));
+  producerHash = toSignal(from(this._producerDataService.getProducerDataHash()));
+
+  producerData = computed(() => {
+    return {
+      hash: this.producerHash(),
+      producers: this.producers(),
+    };
+  });
 
   dataReady = output<boolean>();
 
   constructor() {
     effect(() => {
-      if (this.producers()) {
+      if (this.producers() && this.producerHash()) {
         if (this._dbService.dbReady()) {
-          const result = this._dbService.importData(this.producers() ?? []);
+          const result = this._dbService.importData(this.producers() ?? [], this.producerHash());
           if (result.importComplete()) {
             this.dataReady.emit(true);
           }
