@@ -22,29 +22,35 @@ export class ProducerDataService {
   getProducerData() {
     return fetch(this._updateUrl).then((response) => {
       if (response.ok) {
-        return response.text().then((csvData) => {
-          const records = parse(csvData, {
-            delimiter: ';',
-            comment: '#',
-            encoding: 'utf-8',
-            quote: null,
-            skipRecordsWithError: true,
-          });
-          return records.map((record) => {
-            const producer: Producer = {
-              address: `${record[2]} ${record[3]}`,
-              code: {
-                country: 'DE',
-                state: record[0],
-                code: record[5],
-              },
-              name: record[1],
-            };
-            return producer;
-          });
-        });
+        return this.parseProducerData(response);
       }
       return [];
+    });
+  }
+
+  parseProducerData(response: Response): Promise<Producer[]> {
+    return response.blob().then((blob) => {
+      return blob.arrayBuffer().then((csvData) => {
+        const records = parse(new Uint8Array(csvData), {
+          delimiter: ';',
+          comment: '#',
+          encoding: 'utf-8',
+          quote: null,
+          skipRecordsWithError: true,
+        });
+        return records.map((record) => {
+          const producer: Producer = {
+            address: `${record[2]} ${record[3]}`,
+            code: {
+              country: 'DE',
+              state: record[0],
+              code: record[5],
+            },
+            name: record[1],
+          };
+          return producer;
+        });
+      });
     });
   }
 }
