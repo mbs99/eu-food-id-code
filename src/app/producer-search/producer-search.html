@@ -23,16 +23,15 @@
         <input
           id="code"
           class="pure-u-23-24"
-          type="text"
+          type="number"
           required
           [(ngModel)]="code"
           name="code"
-          pattern="\d{5}"
-          type="text"
           min="0"
-          title="5-stelliger Code"
-          maxlength="5"
-          placeholder="5-stelliger Code"
+          title="Zahlencode"
+          max="99999"
+          placeholder="Zahlencode"
+          (keydown.enter)="search()"
         />
       </div>
       <div class="pure-u-1">
