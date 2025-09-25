@@ -9,6 +9,7 @@ export class ProducerDataService {
   private readonly _baseUrl = isDevMode() ? 'http://localhost:4200' : '';
   private readonly _updateUrl = `${this._baseUrl}/export.csv`;
   private readonly _hashUrl = `${this._baseUrl}/export.sha256`;
+  private readonly _fallbackCodePattern = /^[A-Z]{2} \d{3,}/;
 
   getProducerDataHash() {
     return fetch(this._hashUrl).then((response) => {
@@ -41,7 +42,8 @@ export class ProducerDataService {
         return records.map((record) => {
           let code = record[5];
           if (!code.trim().length) {
-            code = record[4].split(',').filter(token => null !== token.match(/^[A-Z]{2} \d{3,}/)).pop() ?? '';
+
+            code = record[4].split(',').filter(token => null !== token.match(this._fallbackCodePattern)).pop() ?? '';
           }
           const producer: Producer = {
             address: `${record[2]} ${record[3]}`,
