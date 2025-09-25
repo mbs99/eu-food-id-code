@@ -23,13 +23,13 @@
         <input
           id="code"
           class="pure-u-23-24"
-          type="number"
+          type="text"
           required
           [(ngModel)]="code"
           name="code"
           min="0"
           title="Zahlencode"
-          max="99999"
+          pattern="[0-9]*"
           placeholder="Zahlencode"
           (keydown.enter)="search()"
         />

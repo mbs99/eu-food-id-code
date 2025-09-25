@@ -1,6 +1,6 @@
-import { Injectable, isDevMode } from '@angular/core';
-import { Producer } from './shared/producer';
-import { parse } from 'csv-parse/browser/esm/sync';
+import {Injectable, isDevMode} from '@angular/core';
+import {Producer} from './shared/producer';
+import {parse} from 'csv-parse/browser/esm/sync';
 
 @Injectable({
   providedIn: 'root',
@@ -39,12 +39,16 @@ export class ProducerDataService {
           skipRecordsWithError: true,
         });
         return records.map((record) => {
+          let code = record[5];
+          if (!code.trim().length) {
+            code = record[4].split(',').filter(token => null !== token.match(/^[A-Z]{2} \d{3,}/)).pop() ?? '';
+          }
           const producer: Producer = {
             address: `${record[2]} ${record[3]}`,
             code: {
               country: 'DE',
               state: record[0],
-              code: record[5],
+              code
             },
             name: record[1],
           };
