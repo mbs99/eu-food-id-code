@@ -22,7 +22,7 @@ export class ProducerSearch {
   private readonly _dbService = inject(DbService);
   country: WritableSignal<string> = signal('DE');
   state: WritableSignal<string> = signal('BW');
-  code: WritableSignal<string> = signal('');
+  code: WritableSignal<number|null> = signal(null);
 
   searchResult: WritableSignal<Producer | null> = signal(null);
 
@@ -33,7 +33,7 @@ export class ProducerSearch {
   msg: WritableSignal<string | null> = signal(null);
 
   search() {
-    if (this.code().length) {
+    if (this.code()) {
       this.searchResult.set(null);
       this._dbService.getProducerById(`${this.state()} ${this.code()}`);
     }
@@ -69,7 +69,7 @@ export class ProducerSearch {
   }
 
   reset() {
-    this.code.set('');
+    this.code.set(null);
     this.state.set('BW');
     this.searchResult.set(null);
     this.msg.set(null);
