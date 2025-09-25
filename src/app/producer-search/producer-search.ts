@@ -1,15 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  inject,
-  signal,
-  WritableSignal,
-} from '@angular/core';
-import { DbService } from '../db.service';
-import { FormsModule } from '@angular/forms';
-import { Producer } from '../shared/producer';
-import { AppData } from '../shared/app-data';
+import {ChangeDetectionStrategy, Component, effect, inject, signal, WritableSignal,} from '@angular/core';
+import {DbService} from '../db.service';
+import {FormsModule} from '@angular/forms';
+import {Producer} from '../shared/producer';
+import {AppData} from '../shared/app-data';
 
 @Component({
   selector: 'app-producer-search',
@@ -23,7 +16,7 @@ export class ProducerSearch {
   private readonly _stateDefault = '-';
   country: WritableSignal<string> = signal('DE');
   state: WritableSignal<string> = signal(this._stateDefault);
-  code: WritableSignal<number|null> = signal(null);
+  code: WritableSignal<number | null> = signal(null);
 
   searchResult: WritableSignal<Producer | null> = signal(null);
 
@@ -74,5 +67,43 @@ export class ProducerSearch {
     this.state.set('BW');
     this.searchResult.set(null);
     this.msg.set(null);
+  }
+
+  stateList(state: string) {
+    if ('BB' === state) {
+      return `Brandenburg (${state})`;
+    } else if ('BE' === state) {
+      return `Berlin (${state})`;
+    } else if ('BW' === state) {
+      return `Baden-Württemberg (${state})`;
+    } else if ('BY' === state) {
+      return `Bayern (${state})`;
+    } else if ('HB' === state) {
+      return `Bremen (${state})`;
+    } else if ('HE' === state) {
+      return `Hessen (${state})`;
+    } else if ('HH' === state) {
+      return `Hamburg (${state})`;
+    } else if ('MV' === state) {
+      return `Mecklenburg-Vorpommern (${state})`;
+    } else if ('NI' === state) {
+      return `Niedersachsen (${state})`;
+    } else if ('NW' === state) {
+      return `Nordrein-Westfalen (${state})`;
+    } else if ('RP' === state) {
+      return `Rheinland-Pfalz (${state})`;
+    } else if ('SH' === state) {
+      return `Schleswig-Holstein (${state})`;
+    } else if ('SL' === state) {
+      return `Saarland (${state})`;
+    } else if ('SN' === state) {
+      return `Sachsen (${state})`;
+    } else if ('ST' === state) {
+      return `Sachsen-Anhalt (${state})`;
+    } else if ('TH' === state) {
+      return `Thüringen (${state})`;
+    } else {
+      return state;
+    }
   }
 }

@@ -6,7 +6,7 @@
         <label for="country">Land</label>
         <select id="country" class="pure-input-1-2" required [(ngModel)]="country" name="country">
           @for (country of appData()?.contries; track $index) {
-          <option>{{ country }}</option>
+            <option>{{ country }}</option>
           }
         </select>
       </div>
@@ -15,7 +15,7 @@
         <select id="state" class="pure-input-1-2" required [(ngModel)]="state" name="state">
           <option>-</option>
           @for (state of appData()?.states; track $index) {
-          <option>{{ state }}</option>
+            <option value="{{ state }}">{{ stateList(state) }}</option>
           }
         </select>
       </div>
@@ -50,35 +50,35 @@
 </form>
 
 @if (searchResult()) {
-<form class="pure-form pure-form-stacked container">
-  <fieldset>
-    <legend>Ergebnis</legend>
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <table class="pure-table pure-table-horizontal">
-          <thead>
+  <form class="pure-form pure-form-stacked container">
+    <fieldset>
+      <legend>Ergebnis</legend>
+      <div class="pure-g">
+        <div class="pure-u-1">
+          <table class="pure-table pure-table-horizontal">
+            <thead>
             <tr>
               <th>#</th>
               <th>Name</th>
               <th>Adresse</th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr>
               <td>1</td>
               <td>{{ searchResult()?.name }}</td>
               <td>{{ searchResult()?.address }}</td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  </fieldset>
-</form>
+    </fieldset>
+  </form>
 } @else if (msg()) {
-<form class="pure-form pure-form-stacked container">
-  <fieldset>
-    <legend>{{ msg() }}</legend>
-  </fieldset>
-</form>
+  <form class="pure-form pure-form-stacked container">
+    <fieldset>
+      <legend>{{ msg() }}</legend>
+    </fieldset>
+  </form>
 }
