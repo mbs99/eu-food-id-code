@@ -20,8 +20,9 @@ import { AppData } from '../shared/app-data';
 })
 export class ProducerSearch {
   private readonly _dbService = inject(DbService);
+  private readonly _stateDefault = '-';
   country: WritableSignal<string> = signal('DE');
-  state: WritableSignal<string> = signal('BW');
+  state: WritableSignal<string> = signal(this._stateDefault);
   code: WritableSignal<number|null> = signal(null);
 
   searchResult: WritableSignal<Producer | null> = signal(null);
@@ -33,7 +34,7 @@ export class ProducerSearch {
   msg: WritableSignal<string | null> = signal(null);
 
   search() {
-    if (this.code()) {
+    if (this.code() && this._stateDefault !== this.state()) {
       this.searchResult.set(null);
       this._dbService.getProducerById(`${this.state()} ${this.code()}`);
     }

@@ -13,6 +13,7 @@
       <div class="pure-u-1 pure-u-md-1-3">
         <label for="state">Bundesland</label>
         <select id="state" class="pure-input-1-2" required [(ngModel)]="state" name="state">
+          <option>-</option>
           @for (state of appData()?.states; track $index) {
           <option>{{ state }}</option>
           }
