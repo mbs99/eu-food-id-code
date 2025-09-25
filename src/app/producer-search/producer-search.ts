@@ -89,7 +89,7 @@ export class ProducerSearch {
     } else if ('NI' === state) {
       return `Niedersachsen (${state})`;
     } else if ('NW' === state) {
-      return `Nordrein-Westfalen (${state})`;
+      return `Nordrhein-Westfalen (${state})`;
     } else if ('RP' === state) {
       return `Rheinland-Pfalz (${state})`;
     } else if ('SH' === state) {
